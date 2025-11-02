@@ -39,6 +39,12 @@ if [ ! -d "device/xiaomi/camera" ]; then
 fi
 
 
+# Clone vendor_infinity-priv_keys
+if [ ! -d "vendor/infinity-priv/keys" ]; then
+    git clone https://github.com/ProjectInfinity-X/vendor_infinity-priv_keys vendor/infinity-priv/keys
+fi
+
+
 # Apply Binder threadpool patch
 if [ -d "system/libhwbinder" ]; then
     cd system/libhwbinder
