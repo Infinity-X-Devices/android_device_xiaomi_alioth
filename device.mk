@@ -337,6 +337,7 @@ PRODUCT_PACKAGES += \
     LineageSDKOverlayAlioth \
     LineageSettingsOverlayAlioth \
     NfcOverlayAlioth \
+    OpenDeltaOverlayKona \
     SecureElementOverlayAlioth \
     SettingsOverlayAlioth \
     SettingsProviderOverlayAliothPOCO \
