@@ -346,12 +346,16 @@ PRODUCT_PACKAGES += \
     SettingsProviderOverlayAliothPOCO \
     SettingsProviderOverlayAliothRedmi \
     SettingsProviderOverlayAliothMi11X \
+    SettingsProviderOverlayAlioth \
     SystemUIOverlayAlioth \
     TelephonyOverlayAlioth \
-    WifiOverlayAlioth
+    WifiOverlayAlioth \
+    WifiOverlayAliothPOCO \
+    WifiOverlayAliothRedmi \
+    WifiOverlayAliothMi
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/apps/CarrierConfig
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/CarrierConfigOverlayAlioth
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true

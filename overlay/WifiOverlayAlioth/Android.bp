@@ -5,6 +5,8 @@
 
 runtime_resource_overlay {
     name: "WifiOverlayAlioth",
+    manifest: "AndroidManifest.xml",
+    resource_dirs: ["res"],
     vendor: true,
 }
 
