@@ -6,16 +6,18 @@ import android.content.Intent
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import org.lineageos.xiaomiparts.data.ThermalUtils
 import org.lineageos.xiaomiparts.utils.Logging
 import org.lineageos.xiaomiparts.data.DcDimmingUtils
 import org.lineageos.xiaomiparts.data.ChargeUtils
 import org.lineageos.xiaomiparts.data.HBMManager
+import org.lineageos.xiaomiparts.data.PREF_AUTO_HBM_KEY
+import org.lineageos.xiaomiparts.data.PREF_BYPASS_CHARGE
 
 class BootCompletedReceiver : BroadcastReceiver() {
-
-    private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onReceive(context: Context, intent: Intent) {
         Logging.d(TAG, "Received intent: ${intent.action}")
@@ -24,6 +26,7 @@ class BootCompletedReceiver : BroadcastReceiver() {
         Logging.i(TAG, "Boot completed, restoring settings...")
         
         val pendingResult = goAsync() 
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
         
         scope.launch {
             try {
@@ -33,10 +36,9 @@ class BootCompletedReceiver : BroadcastReceiver() {
                 dcDimmingUtils.setDcDimmingEnabled(dcDimmingEnabled)
                 
                 val chargeUtils = ChargeUtils.getInstance(context)
-                val bypassEnabled = chargeUtils.isBypassChargeEnabled()
-                if (bypassEnabled) {
-                    chargeUtils.enableBypassCharge(true)
-                }
+                val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+                val bypassEnabled = prefs.getBoolean(PREF_BYPASS_CHARGE, false)
+                chargeUtils.enableBypassCharge(bypassEnabled)
 
                 Logging.i(TAG, "Initializing HBM")
                 val hbmManager = HBMManager.getInstance(context)
@@ -49,8 +51,7 @@ class BootCompletedReceiver : BroadcastReceiver() {
                     thermalUtils.setDefaultThermalProfile()
                 }
 
-                val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-                val autoHBMEnabled = prefs.getBoolean(HBMManager.PREF_AUTO_HBM_KEY, false)
+                val autoHBMEnabled = prefs.getBoolean(PREF_AUTO_HBM_KEY, false)
 
                 if (autoHBMEnabled) {
                     Logging.i(TAG, "Auto HBM is enabled, starting service")
@@ -59,6 +60,7 @@ class BootCompletedReceiver : BroadcastReceiver() {
 
             } finally {
                 pendingResult.finish()
+                scope.cancel()
             }
         }
     }
