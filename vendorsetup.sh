@@ -3,7 +3,7 @@
 base64 -d device/xiaomi/alioth/configs/camera/secret > device/xiaomi/alioth/configs/camera/st_license.lic
 
 # Clone kernel_xiaomi_sm8250
-git clone https://github.com/Meow-prjkt/android_kernel_xiaomi_sm8250.git kernel/xiaomi/sm8250 --depth 1 && cd kernel/xiaomi/sm8250 && sed -i '/kernelsu/d' drivers/Kconfig && cd - > /dev/null
+git clone -b 16-R404 https://github.com/Meow-prjkt/android_kernel_xiaomi_sm8250.git kernel/xiaomi/sm8250 --depth 1 && cd kernel/xiaomi/sm8250 && sed -i '/kernelsu/d' drivers/Kconfig && cd - > /dev/null
 
 # Clone hardware_xiaomi
 git clone https://github.com/Meow-prjkt/android_hardware_xiaomi.git hardware/xiaomi
