@@ -187,10 +187,9 @@ PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
-$(call soong_config_set_bool, ufsbsg, ufsframework, bsg)
+$(call soong_config_set,ufsbsg,ufsframework,bsg)
 $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 $(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
-$(call soong_config_set_bool,camera,override_format_from_reserved,true)
 
 # Consumer IR
 PRODUCT_PACKAGES += \
@@ -338,10 +337,7 @@ PRODUCT_PACKAGES += \
     SettingsProviderOverlayAlioth \
     SystemUIOverlayAlioth \
     TelephonyOverlayAlioth \
-    WifiOverlayAlioth \
-    WifiOverlayAliothPOCO \
-    WifiOverlayAliothRedmi \
-    WifiOverlayAliothMi
+    WifiOverlayAlioth
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/CarrierConfigOverlayAlioth
@@ -353,9 +349,6 @@ PRODUCT_PACKAGES += \
     vendor_bt_firmware_mountpoint \
     vendor_dsp_mountpoint \
     vendor_firmware_mnt_mountpoint
-
-PRODUCT_PACKAGES += \
-    OpenDeltaOverlayKona
 
 # Power
 PRODUCT_PACKAGES += \
