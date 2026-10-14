@@ -223,8 +223,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.sys.sf.native_mode=269 \
     ro.vendor.display.paneltype=2 \
     ro.vendor.display.sensortype=2 \
-    vendor.display.qdcm.mode_combine=1 \
-    vendor.display.defer_fps_frame_count=2
+    vendor.display.qdcm.mode_combine=1
    
 PRODUCT_PACKAGES += \
     vendor.display.config@1.9 \
