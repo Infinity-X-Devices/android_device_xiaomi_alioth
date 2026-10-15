@@ -7,9 +7,10 @@ git clone -b magictime-new https://github.com/TIMISONG-dev/kernel_xiaomi_sm8250.
 
 # Clone hardware_xiaomi
 git clone https://github.com/PixelOS-AOSP/android_hardware_xiaomi.git hardware/xiaomi -b seventeen --depth 1
+rm -rf hardware/xiaomi/packages/DSPVolumeSynchronizer
 
 # Clone hardware_dolby
-git clone https://github.com/oplus-kona/hardware_dolby.git hardware/dolby -b sony-A17 --depth 1
+git clone https://github.com/Tsaritsa-Prjkt/android_hardware_dolby.git hardware/dolby -b lineage-24.0 --depth 1
 
 
 # Clone vendor_xiaomi_alioth
